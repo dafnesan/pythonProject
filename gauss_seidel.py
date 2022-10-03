@@ -63,7 +63,6 @@ def define_matrix():
 def process(array, results, iteration_limit: int, tolerance_percentage: float):
     """
     Calcula los valores de las incognitas de un sistema de ecuaciones de n x n con el método de Gauss-Seidel
-
     :param array: Array que contiene los coeficientes del sistema de ecuaciones
     :param results: Array que contiene los resultados de ecuaciones
     :param iteration_limit: Número máximo de iteraciones que se realizarán en caso de no alcanzar el porcentaje de tolerancia de error
@@ -117,8 +116,31 @@ def show_2d_array(array):
 
 def proc():
     global array
+    global results
+    v = []
     for a in range(len(array)):
-        print(np.argmax(np.absolute(array[a])))
+        v.append(np.argmax(np.absolute(array[a])))
+    print(v)
+    for i in range(len(v)):
+        if i == len(v)-1:
+            break
+        else:
+         if v[i] == v[i+1]:
+            print("Ey eso no se vale")
+            break
+    ordenada = []
+    resord = []
+    print()
+    for o in range(len(v)):
+        ordenada.insert(o,array[v.index(o)])
+        resord.insert(o,results[v.index(o)])
+        print(ordenada[o]," --> ",resord[o])
+    array = np.array(ordenada, dtype='float32')
+    results = np.array(resord, dtype='float32')
+    print(array)
+    print(results)
+
+
 
 proc()
 
