@@ -1,9 +1,65 @@
 import numpy as np
 
-array = np.array([[9, 2, -1], [7, 8, 5], [3, 4, -10]], dtype="float32")
-results = np.array([-2, 3, 6], dtype="float32")
+#array = np.array([[9, 2, -1], [7, 8, 5], [3, 4, -10]], dtype="float32")
+#results = np.array([-2, 3, 6], dtype="float32")
+array = 0
+results = 0
 iteration_limit = 100
 tolerance_percentage = 1.0
+
+
+def input_int(promt):
+    # Permite ingresar un valor de tipo entero
+
+    # Parámetros:
+    #   promt: Mensaje a mostrar
+
+    # Retorno:
+    #   Valor de tipo entero
+
+    try:
+        return int(input(promt))
+    except ValueError:
+        print("ERROR. Ingrese un valor numérico.\n")
+        return input_int(promt)
+
+def input_float(promt):
+    # Permite ingresar un valor de tipo flotante
+
+    # Parámetros:
+    #   promt: Mensaje a mostrar
+
+    # Retorno:
+    #   Valor de tipo flotante
+
+    try:
+        return float(input(promt))
+    except ValueError:
+        print("ERROR. Ingrese un valor numérico.\n")
+        return input_float(promt)
+
+def define_matrix():
+    global array
+    global results
+
+    size = 0
+    while True:
+        size = input_int("Ingresa el tamaño de la matriz: ")
+        if size > 1: break
+        else: print("El tamaño de la matriz no puede ser menor a 0\n")
+
+    tmp_array = []
+    tmp_res = []
+
+    for row in range(size):
+        tmp = []
+        for column in range(size):
+            tmp.append(input_float(f"x{column}: "))
+        tmp_array.append(tmp)
+        tmp_res.append(input_float(f"Resultado de la ecuación {row}:"))
+
+    array = np.array(tmp_array, dtype="float64")
+    results = np.array(tmp_res, dtype="float64")
 
 def process(array, results, iteration_limit: int, tolerance_percentage: float):
     """
@@ -54,4 +110,5 @@ def print_1d_array(array):
     for a in array:
         print(a, end=", ")
 
+define_matrix()
 process(array, results, iteration_limit, tolerance_percentage)
