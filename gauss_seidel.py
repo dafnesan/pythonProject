@@ -1,12 +1,11 @@
 import numpy as np
 
-#array = np.array([[9, 2, -1], [7, 8, 5], [3, 4, -10]], dtype="float32")
-#results = np.array([-2, 3, 6], dtype="float32")
-array = 0
-results = 0
-iteration_limit = 100
+array = np.array([[3, 4, -10], [9, 2, -1], [7, 8, 5]], dtype="float32")
+results = np.array([-2, 3, 6], dtype="float32")
+#array = 0
+#results = 0
+iteration_limit = 1
 tolerance_percentage = 1.0
-
 
 def input_int(promt):
     # Permite ingresar un valor de tipo entero
@@ -54,9 +53,9 @@ def define_matrix():
     for row in range(size):
         tmp = []
         for column in range(size):
-            tmp.append(input_float(f"x{column}: "))
+            tmp.append(input_float(f"x{column + 1}: "))
         tmp_array.append(tmp)
-        tmp_res.append(input_float(f"Resultado de la ecuación {row}:"))
+        tmp_res.append(input_float(f"Resultado de la ecuación {row + 1}:"))
 
     array = np.array(tmp_array, dtype="float64")
     results = np.array(tmp_res, dtype="float64")
@@ -110,5 +109,18 @@ def print_1d_array(array):
     for a in array:
         print(a, end=", ")
 
-define_matrix()
-process(array, results, iteration_limit, tolerance_percentage)
+def show_2d_array(array):
+    for row in range(len(array)):
+        for column in range(len(array[row])):
+            print(f"{array[row][column]} \t", end="")
+        print(results[row])
+
+def proc():
+    global array
+    for a in range(len(array)):
+        print(np.argmax(np.absolute(array[a])))
+
+proc()
+
+#define_matrix()
+#process(array, results, iteration_limit, tolerance_percentage)
